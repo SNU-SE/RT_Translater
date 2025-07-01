@@ -116,13 +116,17 @@ class RTTranslator {
 
     // 음성 인식 초기화
     initSpeechRecognition() {
+        console.log('음성 인식 초기화 시작...');
+        
         if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+            console.error('브라우저가 음성 인식을 지원하지 않습니다.');
             this.showError('이 브라우저는 음성 인식을 지원하지 않습니다. Chrome, Edge, Safari 등에서 이용하세요.');
             return;
         }
 
         const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
         this.recognition = new SpeechRecognition();
+        console.log('음성 인식 객체 생성 완료:', this.recognition);
         
         this.recognition.continuous = true;
         this.recognition.interimResults = true;
@@ -197,7 +201,16 @@ class RTTranslator {
         this.elements.swapBtn.addEventListener('click', () => this.swapLanguages());
 
         // 음성 입력
-        this.elements.microphoneBtn.addEventListener('click', () => this.toggleRecording());
+        if (this.elements.microphoneBtn) {
+            this.elements.microphoneBtn.addEventListener('click', () => {
+                console.log('마이크 버튼이 클릭되었습니다!');
+                this.toggleRecording();
+            });
+            console.log('마이크 버튼 이벤트 리스너가 등록되었습니다.');
+        } else {
+            console.error('마이크 버튼 요소를 찾을 수 없습니다!');
+        }
+        
         this.elements.pushToTalkBtn.addEventListener('click', () => this.setContinuousMode(false));
         this.elements.continuousBtn.addEventListener('click', () => this.setContinuousMode(true));
 
@@ -349,14 +362,19 @@ class RTTranslator {
 
     // 녹음 토글
     toggleRecording() {
+        console.log('toggleRecording 함수 호출됨. isRecording:', this.isRecording);
+        
         if (!this.recognition) {
+            console.error('음성 인식 객체가 없습니다.');
             this.showError('음성 인식이 지원되지 않습니다.');
             return;
         }
 
         if (this.isRecording) {
+            console.log('녹음 중지 시도...');
             this.stopRecording();
         } else {
+            console.log('녹음 시작 시도...');
             this.startRecording();
         }
     }
@@ -390,14 +408,21 @@ class RTTranslator {
 
     // 녹음 시작
     async startRecording() {
+        console.log('startRecording 함수 시작');
+        
         // 마이크 권한 확인
+        console.log('마이크 권한 요청 중...');
         const hasPermission = await this.requestMicrophonePermission();
         if (!hasPermission) {
+            console.log('마이크 권한이 거부되었습니다.');
             return;
         }
+        console.log('마이크 권한 획득 성공');
 
         try {
+            console.log('음성 인식 시작 시도...');
             this.recognition.start();
+            console.log('음성 인식이 성공적으로 시작되었습니다.');
         } catch (error) {
             console.error('녹음 시작 오류:', error);
             this.showError('음성 인식을 시작할 수 없습니다. 잠시 후 다시 시도해주세요.');
