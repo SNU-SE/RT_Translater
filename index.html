@@ -118,8 +118,12 @@
             <section class="voice-section">
                 <div class="voice-input-container">
                     <div class="microphone-area">
-                        <button id="microphoneBtn" class="microphone-btn" aria-label="음성 입력 시작">
+                        <button id="microphoneBtn" class="microphone-btn" aria-label="음성 입력 시작" onclick="window.app && app.toggleRecording && app.toggleRecording(); console.log('마이크 버튼 onclick 실행됨!');">
                             <i class="fas fa-microphone"></i>
+                        </button>
+                        <!-- 백업 마이크 버튼 -->
+                        <button id="backupMicBtn" class="microphone-btn" style="position: absolute; top: 90px; background-color: #ef4444;" onclick="window.app && app.toggleRecording && app.toggleRecording(); alert('백업 마이크 버튼 작동!');" title="백업 마이크 버튼">
+                            <i class="fas fa-microphone-alt"></i>
                         </button>
                         <div class="recording-indicator" id="recordingIndicator">
                             <div class="pulse"></div>
