@@ -216,7 +216,16 @@ class RTTranslator {
 
         // 설정 및 테마
         this.elements.themeToggle.addEventListener('click', () => this.toggleTheme());
-        this.elements.settingsBtn.addEventListener('click', () => this.openSettings());
+        
+        if (this.elements.settingsBtn) {
+            this.elements.settingsBtn.addEventListener('click', () => {
+                console.log('설정 버튼이 클릭되었습니다!');
+                this.openSettings();
+            });
+            console.log('설정 버튼 이벤트 리스너가 등록되었습니다.');
+        } else {
+            console.error('설정 버튼 요소를 찾을 수 없습니다!');
+        }
         this.elements.closeSettingsModal.addEventListener('click', () => this.closeSettings());
         this.elements.saveSettings.addEventListener('click', () => this.saveSettingsData());
         this.elements.cancelSettings.addEventListener('click', () => this.closeSettings());
@@ -1044,8 +1053,17 @@ class RTTranslator {
 
     // 설정 관리
     openSettings() {
-        this.elements.settingsModal.classList.add('active');
-        this.loadSettingsToUI();
+        console.log('설정 모달 열기 시도...');
+        console.log('settingsModal 요소:', this.elements.settingsModal);
+        
+        if (this.elements.settingsModal) {
+            this.elements.settingsModal.classList.add('active');
+            this.loadSettingsToUI();
+            console.log('설정 모달이 열렸습니다.');
+        } else {
+            console.error('settingsModal 요소를 찾을 수 없습니다!');
+            this.showError('설정 화면을 열 수 없습니다. 페이지를 새로고침 해주세요.');
+        }
     }
 
     closeSettings() {
