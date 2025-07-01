@@ -125,6 +125,10 @@
                         <button id="backupMicBtn" class="microphone-btn" style="position: absolute; top: 90px; background-color: #ef4444;" onclick="window.app && app.toggleRecording && app.toggleRecording(); alert('백업 마이크 버튼 작동!');" title="백업 마이크 버튼">
                             <i class="fas fa-microphone-alt"></i>
                         </button>
+                        <!-- 응급 테스트 버튼 -->
+                        <button onclick="alert('응급 버튼 작동!'); console.log('응급 버튼 클릭됨');" style="position: absolute; top: 180px; background: green; color: white; padding: 10px; border: none; border-radius: 5px;">
+                            응급 테스트
+                        </button>
                         <div class="recording-indicator" id="recordingIndicator">
                             <div class="pulse"></div>
                         </div>
