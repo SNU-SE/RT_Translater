@@ -28,8 +28,8 @@ class RTTranslator {
 
     // 초기화
     init() {
-        this.loadSettings();
         this.initElements();
+        this.loadSettings();
         this.initSpeechRecognition();
         this.initSpeechSynthesis();
         this.bindEvents();
