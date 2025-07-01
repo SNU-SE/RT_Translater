@@ -1381,6 +1381,35 @@ class RTTranslator {
             this.closeErrorModal();
         }
     }
+
+    // 마이크 버튼 강제 수정 함수 추가
+    fixMicrophoneButton() {
+        console.log('마이크 버튼 강제 수정 시작...');
+        
+        const micBtn = document.getElementById('microphoneBtn');
+        if (!micBtn) {
+            console.error('마이크 버튼을 찾을 수 없습니다!');
+            return;
+        }
+        
+        // 기존 이벤트 리스너 제거
+        const newMicBtn = micBtn.cloneNode(true);
+        micBtn.parentNode.replaceChild(newMicBtn, micBtn);
+        
+        // 새로운 이벤트 리스너 등록
+        newMicBtn.addEventListener('click', (e) => {
+            console.log('🎤 새로운 마이크 버튼 클릭됨!');
+            e.preventDefault();
+            e.stopPropagation();
+            this.toggleRecording();
+        });
+        
+        // elements 객체 업데이트
+        this.elements.microphoneBtn = newMicBtn;
+        
+        console.log('마이크 버튼 강제 수정 완료');
+        this.showToast('마이크 버튼이 수정되었습니다. 다시 클릭해보세요!', 'info');
+    }
 }
 
 // 앱 초기화
