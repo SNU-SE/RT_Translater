@@ -1,0 +1,37 @@
+{
+  "name": "realtime-translator",
+  "version": "1.0.0",
+  "description": "실시간 교육용 번역 웹앱 - 교사와 학생 간 언어 장벽 해소",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "nodemon server/index.js",
+    "client": "serve public",
+    "build": "echo 'Building application...'",
+    "test": "echo 'Running tests...'"
+  },
+  "keywords": [
+    "translation",
+    "education",
+    "realtime",
+    "websocket",
+    "openai",
+    "speech-recognition"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "socket.io": "^4.7.4",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "axios": "^1.6.0",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+} 

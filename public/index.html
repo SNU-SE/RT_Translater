@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>실시간 교육용 번역기</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="app">
+        <!-- 헤더 -->
+        <header class="header">
+            <h1><i class="fas fa-language"></i> 실시간 교육용 번역기</h1>
+            <div class="connection-status">
+                <span id="connectionStatus" class="status-disconnected">
+                    <i class="fas fa-circle"></i> 연결 중...
+                </span>
+            </div>
+        </header>
+
+        <!-- 메인 컨테이너 -->
+        <main class="main-container">
+            <!-- 역할 선택 화면 -->
+            <div id="roleSelection" class="role-selection">
+                <h2>역할을 선택하세요</h2>
+                <div class="role-buttons">
+                    <button id="teacherBtn" class="role-btn teacher-btn">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                        <span>교사</span>
+                        <p>세션을 생성하고 음성을 번역합니다</p>
+                    </button>
+                    <button id="studentBtn" class="role-btn student-btn">
+                        <i class="fas fa-user-graduate"></i>
+                        <span>학생</span>
+                        <p>세션에 참여하고 번역을 받습니다</p>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 교사 화면 -->
+            <div id="teacherInterface" class="interface hidden">
+                <div class="session-info">
+                    <h3>세션 코드</h3>
+                    <div class="session-code-display">
+                        <span id="sessionCode">로딩 중...</span>
+                        <button id="copySessionCode" class="copy-btn">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="microphone-section">
+                    <button id="microphoneBtn" class="microphone-btn">
+                        <i class="fas fa-microphone"></i>
+                    </button>
+                    <div class="mic-status">
+                        <span id="micStatus">마이크 버튼을 눌러 시작하세요</span>
+                    </div>
+                </div>
+
+                <div class="participants-section">
+                    <h4>참가자 (<span id="participantCount">0</span>명)</h4>
+                    <div id="participantsList" class="participants-list">
+                        <!-- 참가자 목록 -->
+                    </div>
+                </div>
+
+                <div class="speech-text">
+                    <h4>음성 인식 결과</h4>
+                    <div id="speechOutput" class="speech-output">
+                        음성 인식 결과가 여기에 표시됩니다...
+                    </div>
+                </div>
+            </div>
+
+            <!-- 학생 화면 -->
+            <div id="studentInterface" class="interface hidden">
+                <div class="join-session">
+                    <h3>세션 참여</h3>
+                    <div class="session-input">
+                        <input type="text" id="sessionCodeInput" placeholder="세션 코드 입력 (예: ABC123)">
+                        <button id="joinSessionBtn">참여</button>
+                    </div>
+                </div>
+
+                <div class="language-selection">
+                    <h4>모국어 선택</h4>
+                    <div class="language-buttons">
+                        <button class="lang-btn" data-lang="zh">🇨🇳 중국어</button>
+                        <button class="lang-btn" data-lang="ru">🇷🇺 러시아어</button>
+                        <button class="lang-btn" data-lang="ja">🇯🇵 일본어</button>
+                        <button class="lang-btn selected" data-lang="en">🇺🇸 영어</button>
+                    </div>
+                </div>
+
+                <div class="translation-section">
+                    <h4>실시간 번역</h4>
+                    <div id="translationOutput" class="translation-output">
+                        번역 결과가 여기에 표시됩니다...
+                    </div>
+                    
+                    <div class="audio-controls">
+                        <button id="playAudioBtn" class="audio-btn" disabled>
+                            <i class="fas fa-volume-up"></i> 음성 재생
+                        </button>
+                    </div>
+                </div>
+
+                <div class="translation-history">
+                    <h4>번역 히스토리</h4>
+                    <div id="historyList" class="history-list">
+                        <!-- 번역 히스토리 -->
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- 토스트 알림 -->
+        <div id="toast" class="toast hidden"></div>
+    </div>
+
+    <!-- Socket.io 클라이언트 -->
+    <script src="/socket.io/socket.io.js"></script>
+    <!-- 메인 JavaScript -->
+    <script src="app.js"></script>
+</body>
+</html> 

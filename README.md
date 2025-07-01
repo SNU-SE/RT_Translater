@@ -1,174 +1,153 @@
-# RT Translator - 실시간 음성 번역 웹앱
+# 실시간 교육용 번역 웹앱
 
-한국어, 중국어, 러시아어를 지원하는 실시간 음성 번역 웹 애플리케이션입니다.
+교사와 학생 간의 언어 장벽을 해소하는 실시간 음성 번역 웹앱입니다. 교사가 말하는 내용을 학생들의 모국어로 실시간 번역하여 다국적 교육 환경을 지원합니다.
 
 ## 🌟 주요 기능
 
-- **실시간 음성 인식**: Web Speech API를 사용한 실시간 음성 인식
-- **다국어 번역**: OpenAI API를 통한 고품질 번역 (한국어 ↔ 중국어 ↔ 러시아어)
-- **음성 합성**: 번역된 텍스트의 자동 음성 재생
-- **번역 기록**: 로컬 스토리지를 활용한 번역 기록 관리
-- **반응형 디자인**: 모바일과 데스크톱 환경 모두 지원
-- **다크/라이트 테마**: 사용자 선호도에 따른 테마 선택
-- **PWA 지원**: 앱처럼 설치하여 사용 가능
+### 교사 기능
+- **세션 생성**: 고유한 세션 코드로 번역 룸 생성
+- **실시간 음성 입력**: 마이크를 통한 연속 음성 인식
+- **참가자 관리**: 접속한 학생들의 언어 설정 확인
+- **번역 상태 모니터링**: 실시간 번역 상태 및 연결 상태 확인
 
-## 🚀 빠른 시작
+### 학생 기능
+- **세션 참여**: 교사가 제공한 코드로 세션 입장
+- **언어 선택**: 개인별 모국어 설정 (중국어, 러시아어, 일본어, 영어)
+- **실시간 번역 수신**: 교사의 음성을 선택한 언어로 실시간 번역 수신
+- **텍스트 및 음성 출력**: 번역된 내용을 텍스트와 음성으로 동시 제공
+
+### 공통 기능
+- **실시간 통신**: WebSocket 기반 실시간 데이터 전송
+- **번역 히스토리**: 세션 중 번역된 내용 기록
+- **연결 상태 관리**: 네트워크 연결 상태 표시 및 재연결 기능
+
+## 🛠 기술 스택
+
+### 프론트엔드
+- HTML5, CSS3, JavaScript (ES6+)
+- Web Speech API (음성 인식)
+- Speech Synthesis API (음성 출력)
+- WebSocket API (실시간 통신)
+
+### 백엔드
+- Node.js + Express
+- Socket.io (실시간 양방향 통신)
+- 메모리 기반 세션 관리
+
+### 향후 통합 예정
+- OpenAI API (GPT 기반 번역)
+- 다양한 배포 환경 지원
+
+## 🚀 설치 및 실행
 
 ### 1. 저장소 클론
+\`\`\`bash
+git clone <repository-url>
+cd realtime-translator
+\`\`\`
 
-```bash
-git clone https://github.com/username/RT_Translater.git
-cd RT_Translater
-```
+### 2. 의존성 설치
+\`\`\`bash
+npm install
+\`\`\`
 
-### 2. 환경 설정
-
-```bash
-# 환경변수 파일 생성
+### 3. 환경 변수 설정
+\`\`\`bash
 cp env.example .env
+# .env 파일을 열어서 필요한 API 키들을 설정하세요
+\`\`\`
 
-# .env 파일에서 OpenAI API 키 설정
-OPENAI_API_KEY=your_openai_api_key_here
-```
+### 4. 개발 서버 실행
+\`\`\`bash
+# 개발 모드로 실행 (nodemon 사용)
+npm run dev
 
-### 3. 로컬 서버 실행
+# 또는 프로덕션 모드로 실행
+npm start
+\`\`\`
 
-```bash
-# Python 3을 사용하는 경우
-python -m http.server 3000
+### 5. 웹앱 접속
+브라우저에서 \`http://localhost:3000\` 에 접속하세요.
 
-# Node.js를 사용하는 경우
-npx serve -p 3000
+## 📖 사용법
 
-# 또는 Live Server (VS Code Extension) 사용
-```
+### 교사용
+1. 웹앱에 접속하여 "교사" 역할을 선택
+2. 자동으로 생성된 세션 코드를 학생들에게 공유
+3. 마이크 권한을 허용하고 마이크 버튼을 눌러 음성 인식 시작
+4. 말하는 내용이 실시간으로 학생들에게 번역되어 전송됨
 
-### 4. 브라우저에서 확인
+### 학생용
+1. 웹앱에 접속하여 "학생" 역할을 선택
+2. 교사에게 받은 세션 코드를 입력하여 세션에 참여
+3. 모국어를 선택 (중국어, 러시아어, 일본어, 영어 중 선택)
+4. 교사의 음성이 실시간으로 번역되어 수신됨
+5. 필요 시 음성 재생 버튼을 눌러 번역된 내용을 음성으로 들을 수 있음
 
-`http://localhost:3000`에서 애플리케이션을 확인할 수 있습니다.
+## 🔧 개발 로드맵
 
-## 📱 사용 방법
+### ✅ Phase 1: 기본 구조 (MVP) - 완료
+- [x] 프론트엔드 기본 UI/UX 구현
+- [x] 백엔드 서버 및 WebSocket 연결
+- [x] 세션 생성/참여 기능
+- [x] 기본 음성 인식 및 텍스트 표시
 
-1. **언어 선택**: 원본 언어와 번역할 언어를 선택합니다
-2. **마이크 권한**: 브라우저에서 마이크 사용 권한을 허용합니다
-3. **음성 입력**: 마이크 버튼을 클릭하고 말을 시작합니다
-4. **번역 확인**: 실시간으로 번역된 결과를 확인합니다
-5. **음성 재생**: 번역 결과를 음성으로 들을 수 있습니다
+### 🚧 Phase 2: 번역 기능 (진행 중)
+- [ ] OpenAI API 통합
+- [ ] 실시간 번역 파이프라인 구축
+- [ ] 다국어 번역 및 텍스트 출력
+- [ ] 번역 품질 최적화
 
-## 🔧 기술 스택
+### 📋 Phase 3: 음성 기능 (예정)
+- [ ] 번역된 텍스트의 음성 합성
+- [ ] 언어별 음성 최적화
+- [ ] 음성 속도 및 볼륨 조절
 
-- **Frontend**: HTML5, CSS3, JavaScript (ES6+)
-- **APIs**: 
-  - Web Speech API (음성 인식)
-  - Speech Synthesis API (음성 합성)
-  - OpenAI API (번역)
-- **Styling**: CSS Variables, Flexbox, Grid
-- **Storage**: Local Storage
-- **PWA**: Web App Manifest, Service Worker (예정)
+### 📋 Phase 4: 고급 기능 (예정)
+- [ ] 번역 히스토리 관리
+- [ ] 세션 데이터 내보내기
+- [ ] 연결 안정성 개선
+- [ ] 성능 최적화
 
-## 📁 프로젝트 구조
+### 📋 Phase 5: 배포 및 운영 (예정)
+- [ ] 프로덕션 환경 배포
+- [ ] 모니터링 및 로깅
+- [ ] 사용자 피드백 수집
+- [ ] 버그 수정 및 개선
 
-```
-RT_Translater/
-├── index.html              # 메인 HTML 파일
-├── manifest.json           # PWA 매니페스트
-├── env.example             # 환경변수 예제
-├── README.md               # 프로젝트 문서
-├── assets/
-│   ├── css/
-│   │   └── style.css       # 메인 스타일시트
-│   ├── js/
-│   │   └── script.js       # 메인 JavaScript
-│   └── images/             # 이미지 리소스
-└── .taskmaster/            # 작업 관리 (Taskmaster)
-    ├── docs/
-    │   └── prd.txt         # 제품 요구사항 문서
-    └── tasks/
-        └── tasks.json      # 작업 관리 파일
-```
+## 🌐 브라우저 호환성
 
-## 🌐 지원 브라우저
+- ✅ Chrome (권장)
+- ✅ Firefox
+- ✅ Safari
+- ✅ Edge
+- ⚠️ 모바일 브라우저 (제한적 지원)
 
-- Chrome 60+ (권장)
-- Firefox 55+
-- Safari 14+
-- Edge 79+
+**참고**: Web Speech API는 HTTPS 환경에서만 작동합니다. 로컬 개발 시에는 localhost에서 정상 작동합니다.
 
-**참고**: 음성 인식 기능은 Chrome에서 가장 안정적으로 작동합니다.
+## 🔒 보안 고려사항
 
-## ⚙️ 설정
+- 음성 데이터는 실시간 처리 후 즉시 삭제
+- 번역 텍스트는 세션 종료 시 삭제
+- 세션 코드는 랜덤 생성되며 6자리 영숫자 조합
+- API 키 및 민감 정보는 환경변수로 관리
 
-### OpenAI API 키 설정
+## 📝 라이센스
 
-1. [OpenAI 플랫폼](https://platform.openai.com/api-keys)에서 API 키를 발급받습니다
-2. 웹앱의 설정 메뉴에서 API 키를 입력합니다
-3. API 키는 브라우저의 로컬 스토리지에만 저장되며 외부로 전송되지 않습니다
-
-### 음성 설정
-
-- **음성 속도**: 0.5x ~ 2.0x 범위에서 조정 가능
-- **음성 볼륨**: 0% ~ 100% 범위에서 조정 가능
-- **연속 인식 모드**: 지속적인 음성 인식 또는 Push-to-Talk 모드 선택
-
-## 🔐 보안 및 프라이버시
-
-- **로컬 저장**: 모든 데이터는 사용자의 브라우저에만 저장됩니다
-- **API 키 보안**: OpenAI API 키는 클라이언트 사이드에서만 사용됩니다
-- **데이터 전송**: 번역을 위한 텍스트만 OpenAI API로 전송됩니다
-- **기록 관리**: 번역 기록은 사용자가 직접 관리할 수 있습니다
-
-## 🚧 개발 상태
-
-### ✅ 완료된 기능
-- [x] 기본 프로젝트 구조
-- [x] HTML/CSS 레이아웃 및 반응형 디자인
-- [x] JavaScript 애플리케이션 구조
-- [x] 테마 토글 기능 (다크/라이트)
-- [x] 언어 선택 UI (한국어/중국어/러시아어)
-- [x] **Web Speech API 음성 인식**: 실시간 음성-텍스트 변환
-- [x] **OpenAI API 번역 연동**: 
-  - GPT-3.5-turbo 기반 고품질 번역
-  - API 키 검증 및 테스트 기능
-  - 번역 캐시 시스템 (성능 최적화)
-  - 자동 재시도 로직 및 오류 처리
-  - 번역 품질 신뢰도 평가
-- [x] PWA 기본 구조 (매니페스트, 서비스 워커)
-
-### 🔄 진행 중인 기능
-- [x] ~~음성 합성 기능~~ (기본 구현 완료, 고도화 필요)
-- [x] ~~번역 기록 관리~~ (기본 구현 완료, UX 개선 필요)
-
-### 📋 예정된 기능
-- [ ] 번역 기록 고도화 (검색, 필터링, 즐겨찾기)
-- [ ] 텍스트-음성 변환 고도화 (다양한 음성, 설정)
-- [ ] 사용자 설정 개선 (언어별 음성 선택 등)
-- [ ] 성능 최적화 및 UI/UX 개선
-- [ ] GitHub Pages 배포 및 프로덕션 환경 설정
-- [ ] 추가 언어 지원 확장
+MIT License
 
 ## 🤝 기여하기
 
 1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
+2. Create your Feature Branch (\`git checkout -b feature/AmazingFeature\`)
+3. Commit your Changes (\`git commit -m 'Add some AmazingFeature'\`)
+4. Push to the Branch (\`git push origin feature/AmazingFeature\`)
 5. Open a Pull Request
 
-## 📄 라이선스
+## 📞 지원
 
-이 프로젝트는 MIT 라이선스 하에 배포됩니다. 자세한 내용은 `LICENSE` 파일을 참조하세요.
-
-## 📞 문의 및 지원
-
-- **이슈 리포트**: [GitHub Issues](https://github.com/username/RT_Translater/issues)
-- **기능 요청**: [GitHub Discussions](https://github.com/username/RT_Translater/discussions)
-
-## 🙏 감사의 말
-
-- OpenAI의 강력한 번역 API
-- 웹 표준을 지원하는 모든 브라우저 개발팀
-- 오픈소스 커뮤니티의 지속적인 기여
+문제가 발생하거나 질문이 있으시면 이슈를 생성해 주세요.
 
 ---
 
-**RT Translator**로 언어의 장벽을 허물어보세요! 🌍✨ 
+**🎯 목표**: 언어 장벽 없는 글로벌 교육 환경 조성 

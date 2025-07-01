@@ -12,6 +12,12 @@ node_modules/
 # Environment variables
 .env
 
+# Cursor IDE configuration (contains API keys)
+.cursor/
+
+# Taskmaster configuration (may contain sensitive data)
+.taskmaster/
+
 # Editor directories and files
 .idea
 .vscode
@@ -23,3 +29,7 @@ node_modules/
 
 # OS specific
 .DS_Store
+
+# Task files
+# tasks.json
+# tasks/ 

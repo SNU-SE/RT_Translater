@@ -1,0 +1,527 @@
+/* 기본 설정 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    color: #333;
+    line-height: 1.6;
+}
+
+.app {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 헤더 */
+.header {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #2d3748;
+}
+
+.header h1 i {
+    color: #667eea;
+    margin-right: 0.5rem;
+}
+
+.connection-status {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.status-connected {
+    color: #48bb78;
+}
+
+.status-disconnected {
+    color: #f56565;
+}
+
+.status-connecting {
+    color: #ed8936;
+}
+
+/* 메인 컨테이너 */
+.main-container {
+    flex: 1;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+/* 공통 인터페이스 스타일 */
+.interface {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 800px;
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* 역할 선택 */
+.role-selection {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 3rem;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    width: 100%;
+}
+
+.role-selection h2 {
+    margin-bottom: 2rem;
+    font-size: 2rem;
+    color: #2d3748;
+}
+
+.role-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.role-btn {
+    background: white;
+    border: 2px solid #e2e8f0;
+    border-radius: 15px;
+    padding: 2rem 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.role-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.teacher-btn:hover {
+    border-color: #4299e1;
+    background: linear-gradient(135deg, #ebf8ff 0%, #bee3f8 100%);
+}
+
+.student-btn:hover {
+    border-color: #48bb78;
+    background: linear-gradient(135deg, #f0fff4 0%, #c6f6d5 100%);
+}
+
+.role-btn i {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+}
+
+.teacher-btn i {
+    color: #4299e1;
+}
+
+.student-btn i {
+    color: #48bb78;
+}
+
+.role-btn span {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #2d3748;
+}
+
+.role-btn p {
+    font-size: 0.9rem;
+    color: #718096;
+    margin: 0;
+}
+
+/* 세션 코드 표시 */
+.session-info {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.session-code-display {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+#sessionCode {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #667eea;
+    background: #f7fafc;
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    letter-spacing: 0.2em;
+    border: 2px solid #e2e8f0;
+}
+
+.copy-btn {
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.copy-btn:hover {
+    background: #5a67d8;
+    transform: scale(1.05);
+}
+
+/* 마이크 섹션 */
+.microphone-section {
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.microphone-btn {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: none;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    font-size: 3rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+    margin-bottom: 1rem;
+}
+
+.microphone-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+}
+
+.microphone-btn.recording {
+    background: linear-gradient(135deg, #f56565 0%, #c53030 100%);
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 10px 30px rgba(245, 101, 101, 0.3);
+    }
+    50% {
+        box-shadow: 0 15px 40px rgba(245, 101, 101, 0.6);
+    }
+    100% {
+        box-shadow: 0 10px 30px rgba(245, 101, 101, 0.3);
+    }
+}
+
+.mic-status {
+    color: #718096;
+    font-size: 1rem;
+}
+
+/* 참가자 섹션 */
+.participants-section {
+    margin: 2rem 0;
+}
+
+.participants-list {
+    background: #f7fafc;
+    border-radius: 10px;
+    padding: 1rem;
+    min-height: 100px;
+    border: 2px solid #e2e8f0;
+}
+
+.participant-item {
+    display: flex;
+    align-items: center;
+    justify-content: between;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* 학생 인터페이스 */
+.join-session {
+    margin-bottom: 2rem;
+}
+
+.session-input {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+#sessionCodeInput {
+    flex: 1;
+    padding: 1rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+#sessionCodeInput:focus {
+    border-color: #667eea;
+}
+
+#joinSessionBtn {
+    background: #48bb78;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#joinSessionBtn:hover {
+    background: #38a169;
+    transform: translateY(-1px);
+}
+
+/* 언어 선택 */
+.language-selection {
+    margin: 2rem 0;
+}
+
+.language-buttons {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.lang-btn {
+    background: white;
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+}
+
+.lang-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.lang-btn.selected {
+    border-color: #667eea;
+    background: linear-gradient(135deg, #ebf8ff 0%, #bee3f8 100%);
+    color: #2b6cb0;
+}
+
+/* 번역 결과 */
+.speech-output, .translation-output {
+    background: #f7fafc;
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 1.5rem;
+    min-height: 150px;
+    margin-top: 1rem;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+/* 음성 컨트롤 */
+.audio-controls {
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.audio-btn {
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.audio-btn:hover:not(:disabled) {
+    background: #5a67d8;
+    transform: translateY(-1px);
+}
+
+.audio-btn:disabled {
+    background: #cbd5e0;
+    cursor: not-allowed;
+}
+
+/* 번역 히스토리 */
+.translation-history {
+    margin-top: 2rem;
+}
+
+.history-list {
+    background: #f7fafc;
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 1rem;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.history-item {
+    background: white;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+    border-left: 4px solid #667eea;
+}
+
+.history-item .original {
+    font-weight: 600;
+    color: #2d3748;
+    margin-bottom: 0.5rem;
+}
+
+.history-item .translated {
+    color: #4a5568;
+}
+
+.history-item .timestamp {
+    font-size: 0.8rem;
+    color: #718096;
+    margin-top: 0.5rem;
+}
+
+/* 토스트 알림 */
+.toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #48bb78;
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    animation: slideInRight 0.3s ease-out;
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.toast.error {
+    background: #f56565;
+}
+
+.toast.warning {
+    background: #ed8936;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    .main-container {
+        padding: 1rem;
+    }
+    
+    .interface {
+        padding: 1.5rem;
+    }
+    
+    .role-buttons {
+        grid-template-columns: 1fr;
+    }
+    
+    .session-input {
+        flex-direction: column;
+    }
+    
+    .language-buttons {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .header {
+        padding: 1rem;
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+    
+    #sessionCode {
+        font-size: 1.5rem;
+        padding: 0.8rem 1.5rem;
+    }
+    
+    .microphone-btn {
+        width: 100px;
+        height: 100px;
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .language-buttons {
+        grid-template-columns: 1fr;
+    }
+    
+    .role-selection {
+        padding: 2rem 1rem;
+    }
+    
+    .session-code-display {
+        flex-direction: column;
+        gap: 1rem;
+    }
+} 
