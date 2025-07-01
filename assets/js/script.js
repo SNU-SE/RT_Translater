@@ -28,11 +28,17 @@ class RTTranslator {
 
     // 초기화
     init() {
+        console.log('1. initElements 시작...');
         this.initElements();
+        console.log('2. loadSettings 시작...');
         this.loadSettings();
+        console.log('3. initSpeechRecognition 시작...');
         this.initSpeechRecognition();
+        console.log('4. initSpeechSynthesis 시작...');
         this.initSpeechSynthesis();
+        console.log('5. bindEvents 시작...');
         this.bindEvents();
+        console.log('6. loadHistory 시작...');
         this.loadHistory();
         
         // 캐시 정리 (일주일 이상 된 캐시 삭제)
@@ -189,7 +195,10 @@ class RTTranslator {
 
     // 이벤트 바인딩
     bindEvents() {
+        console.log('bindEvents 함수 시작');
+        
         // 언어 선택
+        console.log('언어 선택 버튼 이벤트 등록 중...');
         this.elements.sourceLanguageButtons.forEach(btn => {
             btn.addEventListener('click', () => this.selectSourceLanguage(btn.dataset.lang));
         });
@@ -199,6 +208,7 @@ class RTTranslator {
         });
 
         this.elements.swapBtn.addEventListener('click', () => this.swapLanguages());
+        console.log('언어 선택 이벤트 등록 완료');
 
         // 음성 입력
         if (this.elements.microphoneBtn) {
